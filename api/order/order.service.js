@@ -10,21 +10,19 @@ module.exports = {
     update
 }
 async function query(filterBy) {
-    console.log(filterBy);
     try {
-        const collection = await dbService.getCollection('order')
-        // if (filterBy.host) {
-        //     const collection = await dbService.getCollection('stay')
-        //     //1.find all the stays of the host:
-        //     const stays = await collection.find({"host._id":"filterBy.host._id"}).toArray()
-        //     //2.find the orders for the specific stay - getStayById ? > filter the orders array according to the specific stay. 
-        if (filterBy.host) {
-            const orders = await collection.find({"host._id":"filterBy.host._id"}).toArray()
-        }
-        if (filterBy.byUser) {
+        const collection = await dbService.getCollection('order')     
+        if (filterBy.filterType === 'host') {
+            const orders = await collection.find({'host._id': filterBy.filter}).toArray()
+            console.log(orders)
+        return orders}
+        if (filterBy.filterType === 'byUser') {
             const collection = await dbService.getCollection('order')
-            const orders = await collection.find({"byUser._id":"filterBy.byUser._id"}).toArray()
-         } return orders
+            const orders = await collection.find({'byUser._id': filterBy.filterType}).toArray()
+            console.log(orders)
+            return orders
+         }
+        
     } catch (err) {
         logger.error('cannot find orders', err)
         throw err
