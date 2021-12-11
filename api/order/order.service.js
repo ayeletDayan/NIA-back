@@ -11,23 +11,23 @@ module.exports = {
 }
 
 async function query(filterBy) {
-try {
-    const collection = await dbService.getCollection('order')     
-    if (filterBy.filterType === 'host') {
-        const orders = await collection.find({'host._id': filterBy.filter}).toArray()
-        console.log(orders)
-    return orders}
-    if (filterBy.filterType === 'byUser') {
-        const collection = await dbService.getCollection('order')
-        const orders = await collection.find({'byUser._id': filterBy.filterType}).toArray()
-        console.log(orders)
-        return orders
-     }
-    
-} catch (err) {
-    logger.error('cannot find orders', err)
-    throw err
-}
+    try {
+        const collection = await dbService.getCollection('order')     
+        if (filterBy.filterType === 'host') {
+            const orders = await collection.find({'host._id': filterBy.filter}).toArray()
+            console.log(orders)
+        return orders}
+        if (filterBy.filterType === 'byUser') {
+            const collection = await dbService.getCollection('order')
+            const orders = await collection.find({'byUser._id': filterBy.filterType}).toArray()
+            console.log(orders)
+            return orders
+         }
+        
+    } catch (err) {
+        logger.error('cannot find orders', err)
+        throw err
+    }
 }
 
 

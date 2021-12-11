@@ -65,7 +65,7 @@ async function getByuserName(userName) {
 async function remove(userId) {
     try {
         const collection = await dbService.getCollection('user')
-        await collection.deleteOne({ '_id': ObjectId("userId") })
+        await collection.deleteOne({ '_id': ObjectId(userId) })
     } catch (err) {
         logger.error(`cannot remove user ${userId}`, err)
         throw err
