@@ -7,7 +7,7 @@ const ObjectId = require('mongodb').ObjectId
 module.exports = {
     query,
     getById,
-    getByUsername,
+    getByuserName,
     remove,
     update,
     add
@@ -50,13 +50,14 @@ async function getById(userId) {
         throw err
     }
 }
-async function getByUsername(username) {
+async function getByuserName(userName) {
     try {
         const collection = await dbService.getCollection('user')
-        const user = await collection.findOne({ username })
+        const username = userName.userName 
+        const user = await collection.findOne({ "userName": username })
         return user
     } catch (err) {
-        logger.error(`while finding user ${username}`, err)
+        logger.error(`while finding user ${userName}`, err)
         throw err
     }
 }
@@ -64,7 +65,7 @@ async function getByUsername(username) {
 async function remove(userId) {
     try {
         const collection = await dbService.getCollection('user')
-        await collection.deleteOne({ '_id': ObjectId(userId) })
+        await collection.deleteOne({ '_id': ObjectId("userId") })
     } catch (err) {
         logger.error(`cannot remove user ${userId}`, err)
         throw err
@@ -76,7 +77,7 @@ async function update(user) {
         // peek only updatable fields!
         const userToSave = {
             _id: ObjectId(user._id), // needed for the returnd obj
-            username: user.username,
+            userName: user.userName,
             fullname: user.fullname,
             score: user.score,
         }
@@ -93,7 +94,7 @@ async function add(user) {
     try {
         // peek only updatable fields!
         const userToAdd = {
-            username: user.username,
+            userName: user.userName,
             password: user.password,
             fullname: user.fullname,
             score: 100
@@ -113,7 +114,7 @@ function _buildCriteria(filterBy) {
         const txtCriteria = { $regex: filterBy.txt, $options: 'i' }
         criteria.$or = [
             {
-                username: txtCriteria
+                userName: txtCriteria
             },
             {
                 fullname: txtCriteria

@@ -15,6 +15,7 @@ async function query(filterBy) {
         const criteria = _buildCriteria(filterBy)
         // const criteria = {}
         const collection = await dbService.getCollection('stay')
+        // console.log(collection);
         var stays = await collection.find(criteria).toArray()
         return stays
     } catch (err) {
