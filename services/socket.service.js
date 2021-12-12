@@ -10,9 +10,9 @@ function connectSockets(http, session) {
         }
     })
     gIo.on('connection', socket => {
-        console.log('New socket', socket.id)
+        // console.log('New socket', socket.id)
         socket.on('disconnect', socket => {
-            console.log('Someone disconnected')
+            // console.log('Someone disconnected')
         })
         socket.on('chat topic', topic => {
             if (socket.myTopic === topic) return;
@@ -23,7 +23,7 @@ function connectSockets(http, session) {
             socket.myTopic = topic
         })
         socket.on('chat newMsg', msg => {
-            console.log('Emitting Chat msg', msg);
+            // console.log('Emitting Chat msg', msg);
             // emits to all sockets:
             // gIo.emit('chat addMsg', msg)
             // emits only to sockets in the same room

@@ -3,7 +3,7 @@ const logger = require('../../services/logger.service')
 
 // GET LIST
 async function getStays(req, res) {
-  console.log(req);
+  // console.log(req);
   try {
     var queryParams = req.query;
     const stays = await stayService.query(queryParams)

@@ -14,12 +14,12 @@ async function query(filterBy) {
         const collection = await dbService.getCollection('order')     
         if (filterBy.filterType === 'host') {
             const orders = await collection.find({'host._id': filterBy.filter}).toArray()
-            console.log(orders)
+            // console.log(orders)
         return orders}
         if (filterBy.filterType === 'byUser') {
             const collection = await dbService.getCollection('order')
             const orders = await collection.find({'byUser._id': filterBy.filterType}).toArray()
-            console.log(orders)
+            // console.log(orders)
             return orders
          }
         

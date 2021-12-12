@@ -10,7 +10,7 @@ module.exports = {
     update
 }
 async function query(filterBy) {
-    console.log(filterBy);
+    // console.log(filterBy);
     try {
         const criteria = _buildCriteria(filterBy)
         // const criteria = {}
@@ -71,7 +71,7 @@ async function update(stay) {
 }
 
 function _buildCriteria(filterBy) {
-    console.log('for criteria', filterBy)
+    // console.log('for criteria', filterBy)
     const criteria = {}
     if (filterBy.city) {
         const txtCriteria = { $regex: filterBy.city, $options: 'i' }
@@ -86,10 +86,8 @@ function _buildCriteria(filterBy) {
         criteria.$and = [
           { price: { $gte: +(filterBy.price.minPrice)}},
           {price:  { $lte: +(filterBy.price.maxPrice)}}
-         ]}
-        
-
-    console.log('criteria:', criteria);
+         ]}      
+    // console.log('criteria:', criteria);
     return criteria
 }
 

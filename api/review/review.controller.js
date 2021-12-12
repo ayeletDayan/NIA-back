@@ -40,7 +40,7 @@ async function addReview(req, res) {
         review.byUser = user
         const fullUser = await userService.getById(user._id)
 
-        console.log('CTRL SessionId:', req.sessionID);
+        // console.log('CTRL SessionId:', req.sessionID);
         socketService.broadcast({type: 'review-added', data: review, userId: review.byUserId})
         socketService.emitToUser({type: 'review-about-you', data: review, userId: review.aboutUserId})
         socketService.emitTo({type: 'user-updated', data: fullUser, label: fullUser._id})
