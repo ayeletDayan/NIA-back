@@ -9,6 +9,7 @@ module.exports = {
     add,
     update
 }
+
 async function query(filterBy) {
     try {
         const collection = await dbService.getCollection('order')     
@@ -28,6 +29,48 @@ async function query(filterBy) {
         throw err
     }
 }
+
+
+// async function query(filterBy) {
+//     console.log('filter by', filterBy[0]);
+//     try {
+//         const collection = await dbService.getCollection('order')
+//         const orders = await collection.find({'host._id': filterBy[0]}).toArray()
+//         console.log('orders', orders)
+//         return orders 
+//     } catch (err) {
+//         logger.error('cannot find orders', err)
+//         throw err
+//     }
+// }
+// async function query(filterBy) {
+//     console.log('filter by', filterBy[0]);
+//     try {
+//         const collection = await dbService.getCollection('order')
+//         // const orders = await collection.find().toArray()
+//         // if (filterBy.host) {
+//             // const collection = await dbService.getCollection('stay')
+//             //1.find all the stays of the host:
+//             // const stays = await collection.find({"host._id":"filterBy.host._id"}).toArray()
+//             //2.find the orders for the specific stay - getStayById ? > filter the orders array according to the specific stay. 
+//         // if (filterBy.filterType === 'host') {
+//         //     const hostId = filterBy.filter
+//             const orders = await collection.find({'host._id': filterBy[0]}).toArray()
+//         //     console.log('filtered orders', orders)
+//         //     return orders
+//         // }
+//         // if (filterBy.filterType === 'byUser') {
+//         //     const byUserId = filterBy.filter
+//         //     const orders = await collection.find({"byUser._id": ObjectId(byUserId)}).toArray()
+//         //     return orders
+//         //  }
+//          console.log('orders', orders)
+//          return orders 
+//     } catch (err) {
+//         logger.error('cannot find orders', err)
+//         throw err
+//     }
+// }
 
 async function getById(orderId) {
     try {
