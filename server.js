@@ -14,7 +14,7 @@ const session = expressSession({
     cookie: { secure: false }
 })
 app.use(express.json())
-app.use(express.static('public'));
+// app.use(express.static('public'));
 app.use(session)
 
 if (process.env.NODE_ENV === 'production') {
