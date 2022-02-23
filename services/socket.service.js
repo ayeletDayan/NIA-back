@@ -48,7 +48,8 @@ function emitTo({ type, data, label }) {
     else gIo.emit(type, data)
 }
 
-async function emitToUser({ type, data, userId }) {
+async function emitToUser({ type, data, userId }) { //we use only this 13.12.21
+    //({type: 'order-to-you', data: order, userId: order.host._id})
     logger.debug('Emiting to user socket: ' + userId)
     const socket = await _getUserSocket(userId)
     if (socket) socket.emit(type, data)
